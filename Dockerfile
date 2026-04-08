@@ -14,5 +14,5 @@ COPY . .
 # Set environment variable for OpenAI API (placeholder, should be passed at runtime)
 # ENV HF_TOKEN=your_token_here
 
-# Command to run the inference script by default
-CMD ["python", "inference.py"]
+# Command to run the FastAPI app as a server (Mandatory for OpenEnv Reset check)
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]

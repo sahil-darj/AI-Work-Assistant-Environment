@@ -15,11 +15,28 @@ app = FastAPI(title="OpenEnv AI Work Assistant Dashboard")
 
 # Ensure static directory exists
 os.makedirs("static", exist_ok=True)
+templates = Jinja2Templates(directory="static")
+global_env = WorkEnv()
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def get_dashboard(request: Request):
-    with open("static/index.html", "r") as f:
-        return f.read()
+    return templates.TemplateResponse("index.html", {"request": request})
+
+# --- MANDATORY OPENENV API ---
+@app.post("/reset")
+async def reset_env():
+    return global_env.reset().dict()
+
+@app.post("/step")
+async def step_env(action: Action):
+    obs, reward, done, info = global_env.step(action)
+    return {"observation": obs.dict(), "reward": reward.dict(), "done": done, "info": info}
+
+@app.get("/state")
+async def get_state():
+    return global_env.state().dict()
+
+# --- STREAMING ---
 
 @app.get("/stream")
 async def stream_run():
