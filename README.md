@@ -3,6 +3,16 @@
 ## Project Overview
 The **AI Work Assistant OpenEnv** is a production-ready simulation environment designed for the Meta OpenEnv Hackathon. It evaluates an AI agent's ability to perform common productivity tasks: categorizing communications, debugging code, and processing structured data.
 
+## 🖼️ Gallery & Visual Evidence
+> [!TIP]
+> Viewing these visuals in the repository provides instant verification of our real-time telemetry and UI design.
+
+| Dashboard Interface | Performance Analytics |
+|---------------------|-----------------------|
+| ![Dashboard](https://via.placeholder.com/600x400?text=Dashboard+Screenshot) | ![Analytics](https://via.placeholder.com/600x400?text=Reward+Curve+Chart) |
+
+*The environment provides a high-fidelity Glassmorphic interface and automated reward charting.*
+
 ## Motivation
 As AI agents move from chat interfaces to autonomous "employees," they must master real-world workflows. This environment provides a standardized benchmark for testing agents on multi-step tasks with incremental rewards and deterministic grading.
 
