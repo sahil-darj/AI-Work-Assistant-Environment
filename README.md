@@ -1,100 +1,54 @@
-# AI Work Assistant OpenEnv
+# 🤖 AI Work Assistant: OpenEnv Hub
 
-## Project Overview
-The **AI Work Assistant OpenEnv** is a production-ready simulation environment designed for the Meta OpenEnv Hackathon. It evaluates an AI agent's ability to perform common productivity tasks: categorizing communications, debugging code, and processing structured data.
+### 🚀 What is this?
+This is a **smart testing simulator** for AI agents. Instead of just "chatting" with an AI, this project gives the AI **real work tasks** to solve and gives it a score based on how well it did.
 
-## 🖼️ Gallery & Visual Evidence
-> [!TIP]
-> Viewing these visuals in the repository provides instant verification of our real-time telemetry and UI design.
+It was built specifically for the **Meta OpenEnv Hackathon**.
 
-| Dashboard Interface | Performance Analytics |
-|---------------------|-----------------------|
-| ![Dashboard](https://via.placeholder.com/600x400?text=Dashboard+Screenshot) | ![Analytics](https://via.placeholder.com/600x400?text=Reward+Curve+Chart) |
+---
 
-*The environment provides a high-fidelity Glassmorphic interface and automated reward charting.*
+### 💼 What can the AI do?
+The AI is tested on 3 real-world tasks:
+1. **Email Triage (Easy)**: The AI reads emails and decides if they are Spam, Work, or Important.
+2. **Code Review (Medium)**: The AI looks at buggy Python code and finds the error.
+3. **Data Cleaning (Hard)**: The AI fixes a messy dataset by removing errors and duplicates.
 
-## Motivation
-As AI agents move from chat interfaces to autonomous "employees," they must master real-world workflows. This environment provides a standardized benchmark for testing agents on multi-step tasks with incremental rewards and deterministic grading.
+---
 
-## Task Descriptions
+### 🛠️ How to Run (3 Simple Steps)
 
-### 1. Email Triage (Easy)
-- **Input**: Raw email text snippet.
-- **Action**: Classify into one of three categories: `important`, `spam`, or `work`.
-- **Grading**: Binary (1.0 for correct, 0.0 for incorrect).
-
-### 2. Code Review (Medium)
-- **Input**: A buggy Python function.
-- **Action**: Identify the specific type of bug: `missing return`, `wrong variable`, or `syntax error`.
-- **Grading**: Exact match (1.0), partial match if keywords are present (0.5), else 0.0.
-
-### 3. Data Cleaning (Hard)
-- **Input**: A JSON dataset with null values, duplicates, and incorrect types.
-- **Action**: Return a cleaned JSON list following these rules:
-  - Remove rows with `None` values.
-  - Cast `age` to `int`.
-  - Remove duplicate entries (by `id`).
-- **Grading**: Fully correct list (1.0), valid but partially correct list (0.5), else 0.0.
-
-## Interface Specifications
-
-### Observation Space
-The observation is a Pydantic model:
-- `task_id`: String identifier.
-- `description`: Instructions for the task.
-- `input_data`: Task-specific content (text, code, or JSON).
-- `step_count`: Current step in the sequence.
-
-### Action Space
-The agent must provide:
-- `thought`: A string explaining its reasoning.
-- `prediction`: The task output (string for Easy/Medium, List[Dict] for Hard).
-
-### Reward System
-- `+1.0`: Final task completion.
-- `+0.2`: Correct intermediate/partial steps.
-- `-0.1`: Incorrect action.
-- `-0.5`: Repeated/looping action (identical prediction as previous step).
-
-## Setup Instructions
-
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Run Validation**:
-   Check if the environment loads correctly:
-   ```bash
-   python env.py
-   ```
-
-3. **Run Baseline Inference**:
-   Set your API key (ensure you use `HF_TOKEN` as the variable name):
-   ```bash
-   export HF_TOKEN="your_openai_key"
-   python run_baseline.py
-   ```
-
-## Docker Support
-
-Build the environment:
+1. **Install everything**:
 ```bash
-docker build -t openenv-work-assistant .
+pip install -r requirements.txt
 ```
 
-Run in container:
+2. **Add your API Key**:
+Open the `.env` file and paste your OpenAI key.
+
+3. **Start the Dashboard**:
 ```bash
-docker run -e HF_TOKEN="your_token" openenv-work-assistant python run_baseline.py
+python app.py
 ```
+*Then open **http://localhost:8000** in your browser!*
 
-## Hugging Face Spaces
-This project is fully compatible with containerized Hugging Face Spaces. 
-- **Tags**: `openenv`
-- **Instructions**: Connect your repository to a new HF Space and ensure the `Dockerfile` is at the root.
+---
 
-## Baseline Results (GPT-4o)
-- **Email Triage**: 1.0 (Passed)
-- **Code Review**: 1.0 (Passed)
-- **Data Cleaning**: 1.0 (Passed)
-- **Average Score**: 1.0
+### 🌟 Why this project is "Cool"?
+* **Glassmorphic UI**: A beautiful, modern web dashboard to watch the AI work.
+* **Neural Thoughts**: You can see exactly what the AI is "thinking" before it acts.
+* **Reward Charts**: It automatically creates a graph of the AI's performance.
+* **Pro Presentation**: Includes a built-in slide deck (`presentation.html`) for the demo.
+
+---
+
+### 📐 Technical Details (For Judges)
+* **Framework**: OpenEnv Standard
+* **Models**: Pydantic for data, FastAPI for web, Chart.js for graphs.
+* **Interface**: implements `step()`, `reset()`, and `state()`.
+* **Logging**: Follows strict `[START]`, `[STEP]`, and `[END]` requirements.
+
+---
+
+### 🐳 Docker Support
+Build and run anywhere with one command:
+`docker build -t openenv-hub .`
