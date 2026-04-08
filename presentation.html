@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenEnv Hub | Master Deck</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00c8c8;
+            --bg: #ffffff;
+            --text: #111111;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            padding: 80px 120px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .h-large {
+            font-family: 'Syncopate';
+            font-size: 4rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .h-medium {
+            font-family: 'Syncopate';
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .mint {
+            color: var(--primary);
+        }
+
+        .tag {
+            background: #e0fafa;
+            color: var(--primary);
+            padding: 6px 16px;
+            font-weight: 700;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .bullets {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .bullets li {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .bullets li::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tech-item {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .tech-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 40px;
+            left: 120px;
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            right: 80px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            border: 1px solid #eee;
+            background: white;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text);
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .count {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--primary);
+            min-width: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Slide 1 -->
+    <div class="slide active">
+        <div class="tag">OPENENV HUB | MISSION DECK</div>
+        <h1 class="h-large">THE FUTURE OF <br><span class="mint">PRODUCTIVITY</span>.</h1>
+        <p style="font-size: 1.5rem; color: #666; max-width: 600px;">A High-Fidelity Simulation Ecosystem for the next
+            generation of AI Workforce.</p>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <div class="tag">01: THE WHY</div>
+        <h2 class="h-medium">THE "CHAT" <span class="mint">CRISIS</span>.</h2>
+        <ul class="bullets">
+            <li>LLMs are trapped in browser windows and text boxes.</li>
+            <li>Real-world productivity requires <strong>Agency</strong>, not just answers.</li>
+            <li>Current agents lack professional intuition in messy environments.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <div class="tag">02: THE GAP</div>
+        <h2 class="h-medium">MISSING <span class="mint">ENVIRONMENTS</span>.</h2>
+        <ul class="bullets">
+            <li>No sandboxes for evaluating multi-step productivity logic.</li>
+            <li>Lack of deterministic rewards for "work-like" behavior.</li>
+            <li>High risk of iterating directly on production data.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+        <div class="tag">03: THE SOLUTION</div>
+        <h2 class="h-medium">OPENENV <span class="mint">HUB</span>.</h2>
+        <ul class="bullets">
+            <li>A realistic, secure simulator for core business tasks.</li>
+            <li>OpenEnv compliant interface for universal agent support.</li>
+            <li>Observed "Neural Thought" for safety and auditability.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+        <div class="tag">04: ADVANTAGES</div>
+        <h2 class="h-medium">CORE <span class="mint">BENEFITS</span>.</h2>
+        <ul class="bullets">
+            <li><strong>Deterministic Grading</strong>: No ambiguity in success.</li>
+            <li><strong>Auditability</strong>: Every thought is recorded and analyzed.</li>
+            <li><strong>Scalability</strong>: Easy to add new tasks (DevOps, HR, legal).</li>
+        </ul>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+        <div class="tag">05: ARCHITECTURE</div>
+        <h2 class="h-medium">TASK <span class="mint">DIVERSITY</span>.</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-name">EMAIL TRIAGE</div>
+                <div style="font-size: 0.8rem;">Classifying urgency and intent in raw comms.</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-name">CODE REVIEW</div>
+                <div style="font-size: 0.8rem;">Debugging and logical validation in real-time.</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-name">DATA CLEANING</div>
+                <div style="font-size: 0.8rem;">Structured transformation of messy datasets.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+        <div class="tag">06: TECH STACK</div>
+        <h2 class="h-medium">OUR <span class="mint">ENGINE</span>.</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-name">BACKEND</div>
+                <div style="font-size: 0.8rem;">Python, FastAPI, Pydantic, OpenAI API.</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-name">FRONTEND</div>
+                <div style="font-size: 0.8rem;">Vanilla HTML5/CSS3, Glassmorphic UI.</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-name">TELEMETRY</div>
+                <div style="font-size: 0.8rem;">Chart.js, Server-Sent Events (SSE).</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide">
+        <div class="tag">07: FUTURE ROADMAP</div>
+        <h2 class="h-medium">PLANNED <span class="mint">EVOLUTION</span>.</h2>
+        <ul class="bullets">
+            <li>Integration with local models (Ollama/Llama 3).</li>
+            <li>Multi-agent "Team Collaborative" environment.</li>
+            <li>Real-time browser-based tool interaction (RPAs).</li>
+        </ul>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide">
+        <div class="tag">09: FINAL</div>
+        <h2 class="h-large">READY FOR <br><span class="mint">THE WIN</span>.</h2>
+        <p style="font-size: 1.5rem; color: #666;">OpenEnv Hub: Revolutionizing Agent Evaluation.</p>
+    </div>
+
+    <div class="footer">OPENENV HUB // DESIGN EVOLUTION 2026</div>
+
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <span class="count" id="count">1 / 9</span>
+        <button class="btn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        const count = document.getElementById('count');
+
+        function showSlide(n) {
+            slides[current].classList.remove('active');
+            current = (n + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            count.innerText = `${current + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() { showSlide(current + 1); }
+        function prevSlide() { showSlide(current - 1); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+
+</html>

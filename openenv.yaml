@@ -1,0 +1,20 @@
+name: AI-Work-Assistant-OpenEnv
+version: 1.0.0
+description: A realistic OpenEnv environment for simulating productivity tasks including email triage, code review, and data cleaning.
+tags:
+  - openenv
+  - ai-assistant
+  - productivity
+tasks:
+  - id: email-triage
+    name: Email Triage
+    difficulty: easy
+    description: Classify emails into important, spam, or work.
+  - id: code-review
+    name: Code Review
+    difficulty: medium
+    description: Identify and fix bugs in Python code snippet.
+  - id: data-cleaning
+    name: Data Cleaning
+    difficulty: hard
+    description: Clean a messy dataset by removing nulls, duplicates, and fixing types.
