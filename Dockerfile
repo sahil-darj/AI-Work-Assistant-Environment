@@ -14,6 +14,5 @@ COPY . .
 # Set environment variable for OpenAI API (placeholder, should be passed at runtime)
 # ENV HF_TOKEN=your_token_here
 
-# Command to run the validation or baseline
-# Default to running the env.py for validation
-CMD ["python", "env.py"]
+# Command to run the inference script by default
+CMD ["python", "inference.py"]

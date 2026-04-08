@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 
 from env import WorkEnv, Action
-from run_baseline import get_agent_action
+from inference import get_agent_action
 
 load_dotenv()
 app = FastAPI(title="OpenEnv AI Work Assistant Dashboard")
