@@ -20,7 +20,9 @@ global_env = WorkEnv()
 
 @app.get("/")
 async def get_dashboard(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(
+        request=request, name="index.html"
+    )
 
 # --- MANDATORY OPENENV API ---
 @app.post("/reset")
