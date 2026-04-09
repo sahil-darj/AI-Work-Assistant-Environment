@@ -39,6 +39,11 @@ class WorkEnv:
         self.tasks.extend(get_email_tasks())
         self.tasks.extend(get_code_tasks())
         self.tasks.extend(get_data_tasks())
+        # Force IDs for validator compliance
+        ids = ["task_1", "task_2", "task_3"]
+        for i, task in enumerate(self.tasks):
+            if i < len(ids):
+                task.id = ids[i]
 
     def reset(self) -> Optional[Observation]:
         self.current_task_idx = 0
@@ -91,11 +96,11 @@ class WorkEnv:
             reward_value = 0.01
             reason = "Repeated action detected"
         else:
-            if task.id == "email-triage":
+            if task.id == "task_1":
                 score = grade_email(str(action.prediction), task.expected_category)
-            elif task.id == "code-review":
+            elif task.id == "task_2":
                 score = grade_code(str(action.prediction), task.bug_type)
-            elif task.id == "data-cleaning":
+            elif task.id == "task_3":
                 score = grade_data(action.prediction, task.cleaned_data)
             
             # Phase 2 Compliance: Strictly between 0 and 1
