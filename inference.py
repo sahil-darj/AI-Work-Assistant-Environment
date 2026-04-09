@@ -41,20 +41,32 @@ def mock_solver(obs: Observation) -> Action:
         prediction = [{"id": 1, "name": "Alice", "age": 25}, {"id": 3, "name": "Charlie", "age": 30}]
     return Action(thought=thought, prediction=prediction)
 
-def get_agent_action(obs: Observation) -> Action:
-    if not HF_TOKEN or HF_TOKEN == "your_actual_key_here":
-        return mock_solver(obs)
+def get_agent_action(obs_dict: dict) -> str:
+    """
+    Mandatory: Takes observation, returns action string.
+    Uses OpenAI if keys are present, otherwise defaults to local mock solver.
+    """
+    api_key = os.getenv("HF_TOKEN") or os.getenv("OPENAI_API_KEY")
+    api_base = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
+    model = os.getenv("MODEL_NAME", "gpt-4o")
+
+    # If no key, use local mock solver immediately
+    if not api_key:
+        return mock_solver(obs_dict["task_type"], obs_dict["content"])
+
     try:
+        from openai import OpenAI
+        client = OpenAI(base_url=api_base, api_key=api_key)
+        
+        prompt = f"Evaluate this task and return ONLY the result: {json.dumps(obs_dict)}"
         response = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[{"role": "user", "content": f"Task: {obs.description}\nInput: {obs.input_data}\nRespond JSON: 'thought', 'prediction'"}],
-            response_format={"type": "json_object"},
-            timeout=15
+            model=model,
+            messages=[{"role": "user", "content": prompt}]
         )
-        data = json.loads(response.choices[0].message.content)
-        return Action(thought=data.get("thought", ""), prediction=data.get("prediction", ""))
+        return response.choices[0].message.content
     except Exception as e:
-        return mock_solver(obs)
+        print(f"API Error ({e}), falling back to mock solver.")
+        return mock_solver(obs_dict["task_type"], obs_dict["content"])
 
 def main():
     env = WorkEnv()
