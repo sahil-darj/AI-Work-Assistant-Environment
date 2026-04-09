@@ -2,23 +2,17 @@ from pydantic import BaseModel
 from typing import List
 
 class CodeTask(BaseModel):
-    id: str = "code-review"
-    description: str = "Identify the bug in the following Python code snippet. State whether it's a 'missing return', 'wrong variable', or 'syntax error'."
+    id: str = "task_2"
+    description: str = "Identify the bug in the following Python code snippet."
     code_snippet: str
     bug_type: str
+    grader: str = "graders.code_grader.grade_code"
 
 def get_code_tasks() -> List[CodeTask]:
     return [
         CodeTask(
+            id="task_2_a",
             code_snippet="def add(a, b):\n    result = a + b",
             bug_type="missing return"
-        ),
-        CodeTask(
-            code_snippet="def greet(name):\n    print('Hello ' + nmae)",
-            bug_type="wrong variable"
-        ),
-        CodeTask(
-            code_snippet="def check_even(n)\n    if n % 2 == 0:\n        return True",
-            bug_type="syntax error"
         )
     ]
