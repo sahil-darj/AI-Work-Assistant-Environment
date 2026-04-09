@@ -1,16 +1,7 @@
-def grade_code(prediction: str, expected: str) -> float:
-    """
-    Grader for Code Review Task.
-    Exact match -> 1.0, Partially correct -> 0.5, Wrong -> 0.0
-    """
-    pred = prediction.strip().lower()
-    exp = expected.strip().lower()
-    
-    if pred == exp:
-        return 1.0
-    
-    # Partial match check (e.g., if agent provides explanation but contains keywords)
-    if exp in pred:
-        return 0.5
-        
-    return 0.0
+def grade_code(prediction: str, expected_keywords: list) -> float:
+    """Keyword matching for code review grading."""
+    score = 0.05
+    for kw in expected_keywords:
+        if kw.lower() in str(prediction).lower():
+            score += 0.3
+    return min(score, 0.95)

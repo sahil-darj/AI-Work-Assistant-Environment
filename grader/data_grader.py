@@ -1,12 +1,9 @@
 from typing import List, Dict, Any
 
 def grade_data(prediction: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> float:
-    """
-    Grader for Data Cleaning Task.
-    Fully correct -> 1.0, Partially cleaned -> 0.5, Incorrect -> 0.0
-    """
+    """Grades sorted data comparison with Phase 2 clamping (0.01, 0.99)."""
     if not isinstance(prediction, list):
-        return 0.0
+        return 0.05
         
     try:
         # Sort both by 'id' to compare
@@ -14,9 +11,9 @@ def grade_data(prediction: List[Dict[str, Any]], expected: List[Dict[str, Any]])
         exp_sorted = sorted(expected, key=lambda x: x.get('id', 0))
         
         if pred_sorted == exp_sorted:
-            return 1.0
+            return 0.95
             
-        # Check if at least some rows are cleaned (simple heuristic)
+        # Check if at least some rows are cleaned
         correct_rows = 0
         exp_ids = {row.get('id') for row in exp_sorted}
         for row in pred_sorted:
@@ -27,6 +24,6 @@ def grade_data(prediction: List[Dict[str, Any]], expected: List[Dict[str, Any]])
             return 0.5
             
     except Exception:
-        return 0.0
+        return 0.05
         
-    return 0.0
+    return 0.1
