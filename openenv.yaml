@@ -6,15 +6,15 @@ tasks:
   - id: "task_1"
     name: "Email Triage"
     difficulty: "easy"
-    grader: "grader.email_grader.grade_email"
+    grader: "graders.email_grader.grade_email"
     expected: "work"
   - id: "task_2"
     name: "Code Review"
     difficulty: "medium"
-    grader: "grader.code_grader.grade_code"
+    grader: "graders.code_grader.grade_code"
     expected: ["return", "result"]
   - id: "task_3"
     name: "Data Cleaning"
     difficulty: "hard"
-    grader: "grader.data_grader.grade_data"
+    grader: "graders.data_grader.grade_data"
     expected: [{"id": 1, "name": "Alice", "age": 25}, {"id": 3, "name": "Charlie", "age": 30}]

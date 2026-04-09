@@ -6,9 +6,9 @@ from tasks.email_task import get_email_tasks
 from tasks.code_task import get_code_tasks
 from tasks.data_task import get_data_tasks
 
-from grader.email_grader import grade_email
-from grader.code_grader import grade_code
-from grader.data_grader import grade_data
+from graders.email_grader import grade_email
+from graders.code_grader import grade_code
+from graders.data_grader import grade_data
 
 class Observation(BaseModel):
     task_id: str
