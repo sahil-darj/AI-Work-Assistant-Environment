@@ -81,14 +81,14 @@ class WorkEnv:
         task = self.tasks[self.current_task_idx]
         
         # Check for repeated actions (simulated by checking if prediction is same as last step)
-        reward_value = -0.1 # Default penalty for incorrect action if grader fails
+        reward_value = 0.01 # Default baseline for incorrect action
         reason = "Incorrect action"
         
         # Grader logic
-        score = 0.0
+        score = 0.01 # Baseline failure score
         
         if self.history and action.prediction == self.history[-1]['prediction']:
-            reward_value = -0.5
+            reward_value = 0.01
             reason = "Repeated action detected"
         else:
             if task.id == "email-triage":
@@ -98,17 +98,16 @@ class WorkEnv:
             elif task.id == "data-cleaning":
                 score = grade_data(action.prediction, task.cleaned_data)
             
-            if score == 1.0:
-                reward_value = 1.0
+            # Phase 2 Compliance: Strictly between 0 and 1
+            reward_value = max(min(score, 0.99), 0.01)
+
+            if score > 0.9:
                 reason = "Task completed successfully"
-                # Move to next task
                 self.current_task_idx += 1
                 self.step_count = 0
-            elif score > 0:
-                reward_value = 0.2
+            elif score > 0.1:
                 reason = "Correct intermediate step / Partial success"
             else:
-                reward_value = -0.1
                 reason = "Incorrect prediction"
 
         self.total_reward += reward_value
@@ -126,7 +125,7 @@ class WorkEnv:
 
         obs = self._get_observation() if not self.done else None
         reward = Reward(value=reward_value, reason=reason)
-        info = {"total_reward": self.total_reward, "task_completed": score == 1.0}
+        info = {"total_reward": self.total_reward, "task_completed": score > 0.9}
         
         return obs, reward, self.done, info
 
