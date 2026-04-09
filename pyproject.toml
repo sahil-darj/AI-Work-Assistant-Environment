@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.scripts]
-openenv-work-assistant = "server.app:app"
+server = "server.app:main"
 
 [tool.setuptools]
 packages = ["tasks", "grader"]

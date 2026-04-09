@@ -38,7 +38,13 @@ async def step_env(action: Action):
 async def get_state():
     return global_env.state().dict()
 
-# --- STREAMING ---
+# --- RUNNER ---
+def main():
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=7860)
+
+if __name__ == "__main__":
+    main()
 
 @app.get("/stream")
 async def stream_run():
