@@ -15,4 +15,4 @@ COPY . .
 # ENV HF_TOKEN=your_token_here
 
 # Command to run the FastAPI app as a server (Mandatory for OpenEnv Reset check)
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "7860"]

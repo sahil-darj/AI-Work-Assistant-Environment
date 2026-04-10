@@ -36,14 +36,23 @@ class WorkEnv:
         self.total_reward = 0.0
 
     def _load_tasks(self):
-        self.tasks.extend(get_email_tasks())
-        self.tasks.extend(get_code_tasks())
-        self.tasks.extend(get_data_tasks())
-        # Force IDs for validator compliance
-        ids = ["task_1", "task_2", "task_3"]
-        for i, task in enumerate(self.tasks):
-            if i < len(ids):
-                task.id = ids[i]
+        # Cleanly load exactly one task for each type defined in openenv.yaml
+        e_tasks = get_email_tasks()
+        c_tasks = get_code_tasks()
+        d_tasks = get_data_tasks()
+        
+        # Explicit mapping to match openenv.yaml order and IDs
+        if e_tasks:
+            e_tasks[0].id = "task_1"
+            self.tasks.append(e_tasks[0])
+            
+        if c_tasks:
+            c_tasks[0].id = "task_2"
+            self.tasks.append(c_tasks[0])
+            
+        if d_tasks:
+            d_tasks[0].id = "task_3"
+            self.tasks.append(d_tasks[0])
 
     def reset(self) -> Optional[Observation]:
         self.current_task_idx = 0
@@ -85,12 +94,9 @@ class WorkEnv:
         self.step_count += 1
         task = self.tasks[self.current_task_idx]
         
-        # Check for repeated actions (simulated by checking if prediction is same as last step)
-        reward_value = 0.01 # Default baseline for incorrect action
+        # Phase 2: Start with baseline positive contribution
+        score = 0.01 
         reason = "Incorrect action"
-        
-        # Grader logic
-        score = 0.01 # Baseline failure score
         
         if self.history and action.prediction == self.history[-1]['prediction']:
             reward_value = 0.01
@@ -99,7 +105,8 @@ class WorkEnv:
             if task.id == "task_1":
                 score = grade_email(str(action.prediction), task.expected_category)
             elif task.id == "task_2":
-                score = grade_code(str(action.prediction), task.bug_type)
+                # Ensure we pass the list of keywords
+                score = grade_code(str(action.prediction), task.expected_keywords)
             elif task.id == "task_3":
                 score = grade_data(action.prediction, task.cleaned_data)
             
