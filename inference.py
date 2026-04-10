@@ -10,7 +10,10 @@ from env import WorkEnv, Action, Observation
 load_dotenv()
 
 # MANDATORY ENV VARIABLES (Optional fallback)
-MODEL_NAME = os.getenv("MODEL_NAME", "local-solver")
+API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
+MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o")
+HF_TOKEN = os.getenv("HF_TOKEN")
+LOCAL_IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME")
 
 def log_start(task: str, model: str):
     print(f"[START] task={task} model={model}")
@@ -40,20 +43,18 @@ def get_agent_action(obs: Observation) -> Action:
     Mandatory: Takes observation, returns action.
     Defaults to local mock solver for speed and reliability.
     """
-    api_key = os.getenv("HF_TOKEN") or os.getenv("OPENAI_API_KEY")
+    api_key = HF_TOKEN or os.getenv("OPENAI_API_KEY")
     
     if not api_key:
         return mock_solver(obs)
 
     try:
         from openai import OpenAI
-        api_base = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
-        model = os.getenv("MODEL_NAME", "gpt-4o")
-        client = OpenAI(base_url=api_base, api_key=api_key)
+        client = OpenAI(base_url=API_BASE_URL, api_key=api_key)
         
         prompt = f"Evaluate this task and return JSON with 'thought' and 'prediction': {obs.input_data}"
         response = client.chat.completions.create(
-            model=model,
+            model=MODEL_NAME,
             messages=[{"role": "user", "content": prompt}],
             response_format={"type": "json_object"}
         )
