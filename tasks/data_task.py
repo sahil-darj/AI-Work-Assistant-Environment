@@ -9,7 +9,7 @@ class DataTask(BaseModel):
     messy_data: List[Dict[str, Any]]
     cleaned_data: List[Dict[str, Any]]
     expected: List[Dict[str, Any]] = [] # Metadata alignment
-    grader: str = "graders.data_grader.grade_data"
+    grader: str = "graders.data_grader:grade_data"
 
 def get_data_tasks() -> List[DataTask]:
     expected_val = [{"id": 1, "name": "Alice", "age": 25}, {"id": 3, "name": "Charlie", "age": 30}]
@@ -18,6 +18,7 @@ def get_data_tasks() -> List[DataTask]:
             id="task_3",
             name="Data Cleaning",
             difficulty="hard",
+            description="Clean the messy dataset by fixing types and removing errors.",
             messy_data=[{"id": 1, "name": "Alice", "age": "25"}, {"id": 3, "name": "Charlie", "age": "30"}],
             cleaned_data=expected_val,
             expected=expected_val

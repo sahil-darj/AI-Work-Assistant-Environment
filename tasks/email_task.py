@@ -9,7 +9,7 @@ class EmailTask(BaseModel):
     email_text: str
     expected_category: str
     expected: str = "work" # Metadata alignment
-    grader: str = "graders.email_grader.grade_email"
+    grader: str = "graders.email_grader:grade_email"
 
 def get_email_tasks() -> List[EmailTask]:
     return [
@@ -17,6 +17,7 @@ def get_email_tasks() -> List[EmailTask]:
             id="task_1",
             name="Email Triage",
             difficulty="easy",
+            description="Classify the email as spam, work, or important.",
             email_text="Subject: Urgent: Q4 Project Update Required.",
             expected_category="work",
             expected="work"

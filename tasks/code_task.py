@@ -9,7 +9,7 @@ class CodeTask(BaseModel):
     code_snippet: str
     expected_keywords: List[str]
     expected: List[str] = ["return", "result"] # Metadata alignment
-    grader: str = "graders.code_grader.grade_code"
+    grader: str = "graders.code_grader:grade_code"
 
 def get_code_tasks() -> List[CodeTask]:
     return [
@@ -17,6 +17,7 @@ def get_code_tasks() -> List[CodeTask]:
             id="task_2",
             name="Code Review",
             difficulty="medium",
+            description="Identify the bug in the Python code snippet.",
             code_snippet="def add(a, b):\n    result = a + b",
             expected_keywords=["return", "result"],
             expected=["return", "result"]

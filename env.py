@@ -44,14 +44,17 @@ class WorkEnv:
         # Explicit mapping to match openenv.yaml order and IDs
         if e_tasks:
             e_tasks[0].id = "task_1"
+            e_tasks[0].grader = "graders.email_grader:grade_email"
             self.tasks.append(e_tasks[0])
             
         if c_tasks:
             c_tasks[0].id = "task_2"
+            c_tasks[0].grader = "graders.code_grader:grade_code"
             self.tasks.append(c_tasks[0])
             
         if d_tasks:
             d_tasks[0].id = "task_3"
+            d_tasks[0].grader = "graders.data_grader:grade_data"
             self.tasks.append(d_tasks[0])
 
     def reset(self) -> Optional[Observation]:
