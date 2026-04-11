@@ -8,7 +8,7 @@ class CodeTask(BaseModel):
     description: str = "Identify the bug in the following Python code snippet."
     code_snippet: str
     expected_keywords: List[str]
-    expected: List[str] = ["return", "result"] # Metadata alignment
+    expected: str = "return, result" # Metadata alignment
     grader: str = "tasks.code_grader:grade_code"
 
 def get_code_tasks() -> List[CodeTask]:
@@ -20,6 +20,6 @@ def get_code_tasks() -> List[CodeTask]:
             description="Identify the bug in the Python code snippet.",
             code_snippet="def add(a, b):\n    result = a + b",
             expected_keywords=["return", "result"],
-            expected=["return", "result"]
+            expected="return, result"
         )
     ]
