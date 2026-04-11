@@ -28,13 +28,13 @@ def mock_solver(obs: Observation) -> Action:
     """Fallback solver if API fails or quota exceeded."""
     prediction = "None"
     thought = "Local analytical processing logic."
-    if obs.task_id == "task_1":
+    if obs.task_id == "1":
         content = str(obs.input_data).lower()
         prediction = "work" if "urgent" in content else ("spam" if "won" in content else "important")
-    elif obs.task_id == "task_2":
+    elif obs.task_id == "2":
         content = str(obs.input_data)
         prediction = "def add(a, b):\n    result = a + b\n    return result"
-    elif obs.task_id == "task_3":
+    elif obs.task_id == "3":
         prediction = [{"id": 1, "name": "Alice", "age": 25}, {"id": 3, "name": "Charlie", "age": 30}]
     return Action(thought=thought, prediction=prediction)
 
