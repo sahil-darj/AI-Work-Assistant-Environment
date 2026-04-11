@@ -9,7 +9,7 @@ description = "A real-world OpenEnv environment for productivity agents."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "openenv>=0.2.0",
+    "openenv>=0.1.0",
     "pydantic>=1.10.0",
     "openai>=1.0.0",
     "fastapi",
@@ -24,4 +24,5 @@ dependencies = [
 server = "server.app:main"
 
 [tool.setuptools]
-py-modules = ["env", "email_grader", "code_grader", "data_grader", "email_task", "code_task", "data_task"]
+packages = ["tasks", "server"]
+py-modules = ["env"]

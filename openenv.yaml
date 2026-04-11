@@ -3,29 +3,29 @@ version: 1.0.0
 description: Simulating email triage, code review, and data cleaning tasks.
 entry_point: env:WorkEnv
 tasks:
-  - id: 1
-    name: Email Triage
-    description: Classify the email as spam, work, or important.
-    difficulty: easy
-    grader: email_grader:grade_email
-    expected: work
-  - id: 2
-    name: Code Review
-    description: Identify the bug in the Python code snippet.
-    difficulty: medium
-    grader: code_grader:grade_code
+  - id: "task_1"
+    name: "Email Triage"
+    description: "Classify the email as spam, work, or important."
+    difficulty: "easy"
+    grader: "tasks.email_grader:grade_email"
+    expected: "work"
+  - id: "task_2"
+    name: "Code Review"
+    description: "Identify the bug in the Python code snippet."
+    difficulty: "medium"
+    grader: "tasks.code_grader:grade_code"
     expected:
-      - return
-      - result
-  - id: 3
-    name: Data Cleaning
-    description: Clean the messy dataset by fixing types and removing errors.
-    difficulty: hard
-    grader: data_grader:grade_data
+      - "return"
+      - "result"
+  - id: "task_3"
+    name: "Data Cleaning"
+    description: "Clean the messy dataset by fixing types and removing errors."
+    difficulty: "hard"
+    grader: "tasks.data_grader:grade_data"
     expected:
       - id: 1
-        name: Alice
+        name: "Alice"
         age: 25
       - id: 3
-        name: Charlie
+        name: "Charlie"
         age: 30

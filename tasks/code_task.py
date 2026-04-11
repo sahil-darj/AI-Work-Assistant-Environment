@@ -2,14 +2,14 @@ from pydantic import BaseModel
 from typing import List
 
 class CodeTask(BaseModel):
-    id: str = "2"
+    id: str = "task_2"
     name: str = "Code Review"
     difficulty: str = "medium"
     description: str = "Identify the bug in the following Python code snippet."
     code_snippet: str
     expected_keywords: List[str]
     expected: List[str] = ["return", "result"] # Metadata alignment
-    grader: str = "code_grader:grade_code"
+    grader: str = "tasks.code_grader:grade_code"
 
 def get_code_tasks() -> List[CodeTask]:
     return [

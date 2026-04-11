@@ -2,13 +2,13 @@ import json
 from typing import Dict, Any, List, Optional, Tuple, Union
 from pydantic import BaseModel, Field
 
-from email_task import get_email_tasks
-from code_task import get_code_tasks
-from data_task import get_data_tasks
+from tasks.email_task import get_email_tasks
+from tasks.code_task import get_code_tasks
+from tasks.data_task import get_data_tasks
 
-from email_grader import grade_email
-from code_grader import grade_code
-from data_grader import grade_data
+from tasks.email_grader import grade_email
+from tasks.code_grader import grade_code
+from tasks.data_grader import grade_data
 
 class Observation(BaseModel):
     task_id: str
@@ -43,18 +43,18 @@ class WorkEnv:
         
         # Explicit mapping to match openenv.yaml order and IDs
         if e_tasks:
-            e_tasks[0].id = "1"
-            e_tasks[0].grader = "email_grader:grade_email"
+            e_tasks[0].id = "task_1"
+            e_tasks[0].grader = "tasks.email_grader:grade_email"
             self.tasks.append(e_tasks[0])
             
         if c_tasks:
-            c_tasks[0].id = "2"
-            c_tasks[0].grader = "code_grader:grade_code"
+            c_tasks[0].id = "task_2"
+            c_tasks[0].grader = "tasks.code_grader:grade_code"
             self.tasks.append(c_tasks[0])
             
         if d_tasks:
-            d_tasks[0].id = "3"
-            d_tasks[0].grader = "data_grader:grade_data"
+            d_tasks[0].id = "task_3"
+            d_tasks[0].grader = "tasks.data_grader:grade_data"
             self.tasks.append(d_tasks[0])
 
     def reset(self) -> Optional[Observation]:
@@ -105,12 +105,12 @@ class WorkEnv:
             reward_value = 0.01
             reason = "Repeated action detected"
         else:
-            if task.id == "1":
+            if task.id == "task_1":
                 score = grade_email(str(action.prediction), task.expected_category)
-            elif task.id == "2":
+            elif task.id == "task_2":
                 # Ensure we pass the list of keywords
                 score = grade_code(str(action.prediction), task.expected_keywords)
-            elif task.id == "3":
+            elif task.id == "task_3":
                 score = grade_data(action.prediction, task.cleaned_data)
             
             # Phase 2 Compliance: Strictly between 0 and 1
