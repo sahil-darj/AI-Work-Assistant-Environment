@@ -6,9 +6,9 @@ from tasks.email_task import get_email_tasks
 from tasks.code_task import get_code_tasks
 from tasks.data_task import get_data_tasks
 
-from tasks.email_grader import grade_email
-from tasks.code_grader import grade_code
-from tasks.data_grader import grade_data
+from tasks.task_1.grader import grade as grade_email
+from tasks.task_2.grader import grade as grade_code
+from tasks.task_3.grader import grade as grade_data
 
 class Observation(BaseModel):
     task_id: str
@@ -44,17 +44,17 @@ class WorkEnv:
         # Explicit mapping to match openenv.yaml order and IDs
         if e_tasks:
             e_tasks[0].id = "task_1"
-            e_tasks[0].grader = "tasks.email_grader:grade_email"
+            e_tasks[0].grader = "tasks.task_1.grader:grade"
             self.tasks.append(e_tasks[0])
             
         if c_tasks:
             c_tasks[0].id = "task_2"
-            c_tasks[0].grader = "tasks.code_grader:grade_code"
+            c_tasks[0].grader = "tasks.task_2.grader:grade"
             self.tasks.append(c_tasks[0])
             
         if d_tasks:
             d_tasks[0].id = "task_3"
-            d_tasks[0].grader = "tasks.data_grader:grade_data"
+            d_tasks[0].grader = "tasks.task_3.grader:grade"
             self.tasks.append(d_tasks[0])
 
     def reset(self) -> Optional[Observation]:

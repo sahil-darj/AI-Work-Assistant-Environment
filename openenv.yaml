@@ -7,13 +7,13 @@ tasks:
     name: "Email Triage"
     description: "Classify the email as spam, work, or important."
     difficulty: "easy"
-    grader: "tasks.email_grader:grade_email"
+    grader: "tasks.task_1.grader:grade"
     expected: "work"
   - id: "task_2"
     name: "Code Review"
     description: "Identify the bug in the Python code snippet."
     difficulty: "medium"
-    grader: "tasks.code_grader:grade_code"
+    grader: "tasks.task_2.grader:grade"
     expected:
       - "return"
       - "result"
@@ -21,7 +21,7 @@ tasks:
     name: "Data Cleaning"
     description: "Clean the messy dataset by fixing types and removing errors."
     difficulty: "hard"
-    grader: "tasks.data_grader:grade_data"
+    grader: "tasks.task_3.grader:grade"
     expected:
       - id: 1
         name: "Alice"

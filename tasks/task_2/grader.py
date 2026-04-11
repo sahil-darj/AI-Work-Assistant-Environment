@@ -1,4 +1,4 @@
-def grade_code(prediction: str, expected_keywords: list) -> float:
+def grade(prediction: str, expected_keywords: list) -> float:
     """Keyword matching for code review grading."""
     score = 0.05
     for kw in expected_keywords:

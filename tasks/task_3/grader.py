@@ -1,6 +1,6 @@
 from typing import List, Dict, Any
 
-def grade_data(prediction: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> float:
+def grade(prediction: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> float:
     """Grades sorted data comparison with Phase 2 clamping (0.01, 0.99)."""
     if not isinstance(prediction, list):
         return 0.05
